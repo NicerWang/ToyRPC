@@ -37,7 +37,7 @@ rpc_server *rpc_server_init(char* addr, int port);
  * Register a function to server
  * RETURNS: -1 on failure
  */
-int rpc_register(rpc_server *srv, char *name, rpc_handler handler);
+int rpc_register(rpc_server *server, char *name, rpc_handler handler);
 
 /* Start serving requests */
 void rpc_serve(rpc_server *server);
@@ -57,14 +57,14 @@ rpc_client *rpc_client_init(char *addr, int port);
  * RETURNS: rpc_handler* on success, NULL on error
  * FREE: rpc_handler* NEED to be freed with a single call to free
  */
-rpc_handler *rpc_find(rpc_client *client, char *name);
+rpc_handle *rpc_find(rpc_client *client, char *name);
 
 /*
  * Call remote function by handle
  * RETURNS: rpc_data* on success, NULL on error
  * FREE: rpc_data NEED to be freed with a single call to rpc_data_free
  */
-rpc_data *rpc_call(rpc_client *client, rpc_handler *handler, rpc_data *payload);
+rpc_data *rpc_call(rpc_client *client, rpc_handle *handler, rpc_data *payload);
 
 /*
  * Close client
