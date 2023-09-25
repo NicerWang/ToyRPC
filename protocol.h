@@ -25,9 +25,10 @@
  * From host_byte_order to net_byte_order(big_endian)
  * Or reverse
  */
-uint64_t htonll(uint64_t val)
+uint64_t _htonll(uint64_t val)
 {
     if (BYTE_ORDER == LITTLE_ENDIAN) return ((uint64_t)htonl((int)(val>>32&0xffffffff)) )|( ((uint64_t)htonl((int)(val&0xffffffff)))<<32 );
+    return val;
 }
 
 /*

@@ -1,6 +1,6 @@
 CC=gcc
 RPC_SYSTEM=rpc.o
-LDFLAGS=-std=c11
+LDFLAGS=-std=c99
 
 all: $(RPC_SYSTEM)
 
