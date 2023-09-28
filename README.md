@@ -45,8 +45,8 @@ An Integer.
 
 #### 1.RPC_FIND
 
-<img src="./assets/rpc_find.jpg" alt="RPC_FIND" style="zoom:50%;" />
+<img src="./assets/rpc_find.jpg" alt="RPC_FIND" style="width:400px" />
 
 #### 2.RPC_CALL
 
-<img src="./assets/rpc_call.jpg" alt="RPC_CALL" style="zoom:50%;" />
+<img src="./assets/rpc_call.jpg" alt="RPC_CALL" style="width:400px" />
