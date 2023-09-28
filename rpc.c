@@ -121,6 +121,7 @@ void rpc_serve(rpc_server *server) {
                 rpc_data_free(input);
             }
             if (close(remote_socket) < 0) exit(EXIT_FAILURE);
+            exit(EXIT_SUCCESS);
         } else if (pid > 0) {
             close(remote_socket);
             continue;

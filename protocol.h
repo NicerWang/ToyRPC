@@ -38,7 +38,7 @@ int get_status(int socket){
     int8_t statusCode;
     ssize_t count = read(socket, &statusCode, sizeof(statusCode));
     if(count != sizeof(statusCode)){
-        fprintf(stderr,"protocol > get_status");
+        fprintf(stderr,"protocol > get_status\n");
         return STATUS_ERROR;
     }
     return statusCode;
@@ -50,7 +50,7 @@ int get_status(int socket){
 int set_status(int socket, int8_t statusCode){
     ssize_t count = write(socket, &statusCode, sizeof(statusCode));
     if(count != sizeof(statusCode)){
-        fprintf(stderr,"protocol > get_status");
+        fprintf(stderr,"protocol > set_status\n");
         return -1;
     }
     return 0;
@@ -63,7 +63,7 @@ int get_call_id(int socket){
     int call_id;
     ssize_t count = read(socket, &call_id, sizeof(call_id));
     if(count != sizeof(call_id)){
-        fprintf(stderr,"protocol > get_call_id");
+        fprintf(stderr,"protocol > get_call_id\n");
         return -1;
     }
     return ntohl(call_id);
@@ -76,7 +76,7 @@ int set_call_id(int socket, int call_id){
     call_id = htonl(call_id);
     ssize_t count = write(socket, &call_id, sizeof(call_id));
     if(count != sizeof(call_id)){
-        fprintf(stderr,"protocol > set_call_id");
+        fprintf(stderr,"protocol > set_call_id\n");
         return -1;
     }
     return 0;
@@ -90,12 +90,12 @@ int set_query(int socket, char* query){
     unsigned int query_len_big = htonl(query_len);
     ssize_t count = write(socket, &query_len_big, sizeof(query_len_big));
     if(count != sizeof(query_len_big)){
-        fprintf(stderr,"protocol > set_query(query_len)");
+        fprintf(stderr,"protocol > set_query(query_len)\n");
         return -1;
     }
     count = write(socket, query, query_len);
     if(count != query_len){
-        fprintf(stderr,"protocol > set_query(query)");
+        fprintf(stderr,"protocol > set_query(query)\n");
         return -1;
     }
     return 0;
@@ -108,14 +108,14 @@ char* get_query(int socket){
     unsigned int query_len;
     ssize_t count = read(socket, &query_len, sizeof(query_len));
     if(sizeof(query_len) != count){
-        fprintf(stderr,"protocol > get_query(query_len)");
+        fprintf(stderr,"protocol > get_query(query_len)\n");
         return NULL;
     }
     query_len = ntohl(query_len);
     char* name = malloc(query_len);
     count = read(socket, name, query_len);
     if(query_len != count){
-        fprintf(stderr,"protocol > get_query(query)");
+        fprintf(stderr,"protocol > get_query(query)\n");
         return NULL;
     }
     return name;
@@ -128,12 +128,12 @@ int set_payload(int socket, rpc_data* payload){
     unsigned int data_len = htonl(payload->data_len);
     ssize_t count = write(socket, &data_len, sizeof(data_len));
     if (count != sizeof(data_len)) {
-        fprintf(stderr,"protocol > set_payload(data_len)");
+        fprintf(stderr,"protocol > set_payload(data_len)\n");
         return -1;
     }
     count = write(socket, payload->data, payload->data_len);
     if (count != payload->data_len) {
-        fprintf(stderr,"protocol > set_payload(data)");
+        fprintf(stderr,"protocol > set_payload(data)\n");
         return -1;
     }
     return 0;
@@ -145,7 +145,7 @@ int set_payload(int socket, rpc_data* payload){
 int get_payload(int socket, rpc_data* payload){
     ssize_t count = read(socket, &(payload->data_len), sizeof(payload->data_len));
     if (count != sizeof(payload->data_len)) {
-        fprintf(stderr,"protocol > get_payload(data_len)");
+        fprintf(stderr,"protocol > get_payload(data_len)\n");
         return -1;
     }
     payload->data_len = ntohl(payload->data_len);
@@ -154,7 +154,7 @@ int get_payload(int socket, rpc_data* payload){
     payload->data = malloc(payload->data_len);
     count = read(socket, payload->data, payload->data_len);
     if (count != payload->data_len) {
-        fprintf(stderr,"protocol > get_payload(data)");
+        fprintf(stderr,"protocol > get_payload(data)\n");
         return -1;
     }
     return 0;

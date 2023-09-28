@@ -10,7 +10,7 @@ typedef struct rpc_client rpc_client;
 
 /* The payload for request&response */
 typedef struct {
-    size_t data_len;
+    unsigned int data_len;
     void *data;
 } rpc_data;
 
